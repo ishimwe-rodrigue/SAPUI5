@@ -1,0 +1,150 @@
+<mvc:View
+	controllerName="sap.ui.demo.walkthrough.controller.invoiceList"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+>
+<Table
+    id="invoiceList"
+    headerText="{i18n>invoiceListTitle}"
+    class="saUiResponsiveMargin"
+    width="auto"
+    items="{
+        path: 'invoice>/Invoices',
+        sorter: {
+            path: 'ShipperName',
+            group: true
+        }
+    }"
+>
+<headerToolbar>
+    <Toolbar
+       
+    >
+        <Title
+            text="{i18n>invoiceListTitle}"
+           
+        />
+            <ToolbarSpacer
+               
+            />
+            <SearchField
+  
+                width="50%"
+                search=".onFilterInvoices"
+            />
+            
+    </Toolbar>
+</headerToolbar>
+<columns>
+    <Column
+     
+        demandPopin="true"
+        hAlign="End"
+     
+     
+        minScreenWidth="Small"
+      
+        width="4em"
+    >
+    <Text
+        text="{i18n>columnQuantity}"
+        
+    >
+        
+    </Text>
+     
+ 
+    </Column>
+    <Column>
+        <Text
+     
+            text="{i18n>columnName}"
+           
+        />
+    </Column>
+    <Column
+    minScreenWidth="small"
+    demandPopin="true"
+    >
+<Text
+      text="{i18n>columnStatus}"
+>
+    
+</Text>
+    </Column>
+    <Column
+    minScreenWidth="Tablet"
+    demandPopin="false"
+    >
+        <Text
+    
+            text="{i18n>columnSupplier}"
+       
+        >
+            
+        </Text>
+    </Column>
+    
+    <Column
+    hAlign="End"
+    >
+    <Text
+        text="{i18n>columnPrice}"
+      
+    >
+        
+    </Text>
+    
+
+    </Column>
+</columns>
+<items>
+    <ColumnListItem
+        vAlign="Inherit"
+        type="Navigation"
+        press="onPress"
+    >
+        <cells>
+             <ObjectNumber
+               
+                 emphasized="false"
+            
+                 number="{invoiceQuantity}"
+               
+             />
+             <ObjectIdentifier
+                
+                 textDirection="Inherit"
+                 title="{invoice>ProductName"
+             
+             />
+             <Text
+               
+                 renderWhitespace="false"
+                 text="{
+                    path: 'invoice>Status',
+                    formatter: '.formatter.statusText'
+                 }"
+               
+             />
+             <Text 
+             text="{inovice>ShipperName}"
+             />
+             <ObjectNumber 
+             number="{
+                parts:[{path: 'invoice>ExtendedPrice'},{path: 'view>/currency'}],
+                type: 'sap.ui.model.type.Currency',
+                formatOptions: {
+                    showMeasure: false
+                }
+             }"
+             unit="{viewcurrency}"
+             state="{= ${invoice>ExtendedPrice} > 50 ?  'Error' : 'Success'}"
+             />
+        </cells>
+    </ColumnListItem>
+
+</items>
+    
+</Table>
+</mvc:View>
